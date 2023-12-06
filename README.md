@@ -2,7 +2,8 @@
 
 ![Next-Blog-Thumbnail](https://github.com/stefandjikic/next-cms-blog/assets/65912958/2576b109-d592-4321-9870-0db29d769a3e)
 
-![Video](https://www.youtube.com/watch?v=yAqgjSZ0PqY)
+[![Video](https://github.com/stefandjikic/next-cms-blog/assets/65912958/2576b109-d592-4321-9870-0db29d769a3e)
+](https://www.youtube.com/watch?v=yAqgjSZ0PqY)
 
 ## Technologies used
 
