@@ -1,7 +1,8 @@
-# Build a Blog with Next.js 14 and Sanity CMS
+# Build a Blog with Next.js 14 and Sanity CMS - Repository from my YouTube tutorial
 
 [![Video](https://github.com/stefandjikic/next-cms-blog/assets/65912958/2576b109-d592-4321-9870-0db29d769a3e)
 ](https://www.youtube.com/watch?v=yAqgjSZ0PqY)
+
 
 ## Technologies used
 
