@@ -6,6 +6,7 @@ export interface Post {
   body: any;
   tags: Array<Tag>;
   _id: string;
+  headings?: Array<HTMLHeadElement | string>
 }
 
 export interface Tag {
