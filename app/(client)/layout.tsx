@@ -7,7 +7,7 @@ import { Provider } from "../utils/Provider";
 const firaCode = Fira_Code({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Blog With CMS - Next App",
+  title: "Blog With CMS - Next.js App",
   description: "Created with Next.js and Sanity.io for my YouTube channel",
 };
 
