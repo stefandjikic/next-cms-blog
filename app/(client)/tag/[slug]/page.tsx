@@ -25,6 +25,21 @@ async function getPostsByTag(tag: string) {
 
 export const revalidate = 60;
 
+export async function generateMetadata({ params }: Params) {
+  return {
+    title: `#${params.slug}`,
+    description: `Posts with the tag ${params.slug}`,
+    openGraph: {
+      title: `#${params.slug}`,
+      description: `Posts with the tag ${params.slug}`,
+      type: "website",
+      locale: "en_US",
+      url: `https://next-cms-blog-ce.vercel.app/${params.slug}`,
+      siteName: "DevBlook",
+    },
+  };
+}
+
 interface Params {
   params: {
     slug: string;
@@ -38,9 +53,8 @@ const page = async ({ params }: Params) => {
     <div>
       <Header title={`#${params?.slug}`} tags />
       <div>
-        {posts?.length > 0 && posts?.map((post) => (
-          <PostComponent key={post?._id} post={post} />
-        ))}
+        {posts?.length > 0 &&
+          posts?.map((post) => <PostComponent key={post?._id} post={post} />)}
       </div>
     </div>
   );

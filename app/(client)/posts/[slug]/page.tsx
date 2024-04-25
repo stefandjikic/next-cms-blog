@@ -5,6 +5,7 @@ import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
+import { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +43,38 @@ async function getPost(slug: string) {
 }
 
 export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: Params): Promise<Metadata | undefined> {
+  const post: Post = await getPost(params?.slug);
+  if (!post) {
+    return;
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      locale: "en_US",
+      url: `https://next-cms-blog-ce.vercel.app/${params.slug}`,
+      siteName: "DevBlook",
+      images: [
+        // {
+        //   url: post.image,
+        // }
+        // {
+        //   url: urlForImage(post?.body?.find((b: any) => b._type === "image")).width(1200).height(630).url(),
+        //   width: 1200,
+        //   height: 630,
+        // },
+      ],
+    },
+  };
+}
 
 const page = async ({ params }: Params) => {
   const post: Post = await getPost(params?.slug);

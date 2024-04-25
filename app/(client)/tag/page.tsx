@@ -2,6 +2,7 @@ import Header from "@/app/components/Header";
 import Navbar from "@/app/components/Navbar";
 import { Tag } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 
@@ -19,6 +20,14 @@ async function getAllTags() {
 }
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Tags",
+  // title: {
+  //   absolute: "TAGS",
+  // },
+  description: "Search for posts by tags on the blog"
+}
 
 const page = async () => {
   const tags: Tag[] = await getAllTags();
