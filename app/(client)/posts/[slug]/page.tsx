@@ -1,3 +1,5 @@
+import AddComment from "@/app/components/AddComment";
+import AllComments from "@/app/components/AllComments";
 import Header from "@/app/components/Header";
 import Toc from "@/app/components/Toc";
 import { slugify } from "@/app/utils/helpers";
@@ -18,9 +20,12 @@ interface Params {
   params: {
     slug: string;
   };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
 }
 
-async function getPost(slug: string) {
+async function getPost(slug: string, commentsOrder: string = "desc") {
   const query = `
   *[_type == "post" && slug.current == "${slug}"][0] {
     title,
@@ -34,6 +39,11 @@ async function getPost(slug: string) {
       _id,
       slug,
       name
+    },
+    "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
+      name,
+      comment,
+      _createdAt,
     }
   }
   `;
@@ -76,8 +86,9 @@ export async function generateMetadata({
   };
 }
 
-const page = async ({ params }: Params) => {
-  const post: Post = await getPost(params?.slug);
+const page = async ({ params, searchParams }: Params) => {
+  const commentsOrder = searchParams?.comments || "desc";
+  const post: Post = await getPost(params?.slug, commentsOrder.toString());
 
   if (!post) {
     notFound();
@@ -104,6 +115,12 @@ const page = async ({ params }: Params) => {
           <PortableText
             value={post?.body}
             components={myPortableTextComponents}
+          />
+          <AddComment postId={post?._id} />
+          <AllComments
+            comments={post?.comments || []}
+            slug={post?.slug?.current}
+            commentsOrder={commentsOrder.toString()}
           />
         </div>
       </div>
